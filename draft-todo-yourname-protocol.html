@@ -4,16 +4,37 @@
 <meta charset="utf-8">
 <meta content="Common,Latin" name="scripts">
 <meta content="initial-scale=1.0" name="viewport">
-<title>TODO - Your title</title>
+<title>Continuous Updating and Ratcheting for Rekeying Encrypted Network Transport - Problem Statement</title>
 <meta content="Your Name Here" name="author">
 <meta content="
-       TODO Abstract 
+       The IETF has published many protocols that are synchronous, meaning
+protocols that need continuous, real-time interactive sessions between
+client and server. The security protocols developed by the IETF are no
+exception to this design model. In some network environments,
+session-based security protocols are less than ideal because of the need
+to reestablish sessions via new handshakes that consume scarce power and
+bandwidth. 
+       Some security protocols, for example Continuous Key Agreement protocols,
+offer an alternative approach that starts a session once and then
+performs asynchronous key updates thereafter. The gain is not only fewer
+round trips. Each party advances the key state on its own schedule, so
+one device may update twice for every one update of its peer, which lets
+the functionality and risk profile of each device be adjusted to its
+constraints. Updates also spread the overhead of post- quantum
+cryptography across the life of the association rather than concentrating
+it in each handshake, and that property in particular makes these
+approaches appealing for post-quantum use. This document examines the
+reasons why asynchronicity can provide new strategies for solving
+problems in certain network environments. It also provides high level
+requirements for a solution in this space. 
     " name="description">
 <meta content="xml2rfc 3.34.0" name="generator">
-<meta content="next generation" name="keyword">
-<meta content="unicorn" name="keyword">
-<meta content="AI-native" name="keyword">
-<meta content="draft-todo-yourname-protocol-latest" name="ietf.draft">
+<meta content="continuous" name="keyword">
+<meta content="asynchronous" name="keyword">
+<meta content="updating" name="keyword">
+<meta content="ratcheting" name="keyword">
+<meta content="rekey" name="keyword">
+<meta content="draft-todo-current-problem-statement" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.34.0
     Python 3.14.5
@@ -1042,7 +1063,7 @@ svg {
 <table class="ears">
 <thead><tr>
 <td class="left">Internet-Draft</td>
-<td class="center">TODO - Abbreviation</td>
+<td class="center">CURRENT - Problem Statement</td>
 <td class="right">August 2026</td>
 </tr></thead>
 <tfoot><tr>
@@ -1055,9 +1076,9 @@ svg {
 <div id="internal-metadata" class="document-information">
 <dl id="identifiers">
 <dt class="label-workgroup">Workgroup:</dt>
-<dd class="workgroup">WG Working Group</dd>
+<dd class="workgroup">TBD</dd>
 <dt class="label-internet-draft">Internet-Draft:</dt>
-<dd class="internet-draft">draft-todo-yourname-protocol-latest</dd>
+<dd class="internet-draft">draft-todo-current-problem-statement</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
 <time datetime="2026-08-15" class="published">15 August 2026</time>
@@ -1075,10 +1096,29 @@ svg {
 </dd>
 </dl>
 </div>
-<h1 id="title">TODO - Your title</h1>
+<h1 id="title">Continuous Updating and Ratcheting for Rekeying Encrypted Network Transport - Problem Statement</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">TODO Abstract<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">The IETF has published many protocols that are synchronous, meaning
+protocols that need continuous, real-time interactive sessions between
+client and server. The security protocols developed by the IETF are no
+exception to this design model. In some network environments,
+session-based security protocols are less than ideal because of the need
+to reestablish sessions via new handshakes that consume scarce power and
+bandwidth.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-2">Some security protocols, for example Continuous Key Agreement protocols,
+offer an alternative approach that starts a session once and then
+performs asynchronous key updates thereafter. The gain is not only fewer
+round trips. Each party advances the key state on its own schedule, so
+one device may update twice for every one update of its peer, which lets
+the functionality and risk profile of each device be adjusted to its
+constraints. Updates also spread the overhead of post- quantum
+cryptography across the life of the association rather than concentrating
+it in each handshake, and that property in particular makes these
+approaches appealing for post-quantum use. This document examines the
+reasons why asynchronicity can provide new strategies for solving
+problems in certain network environments. It also provides high level
+requirements for a solution in this space.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1086,14 +1126,12 @@ svg {
       </h2>
 <p id="section-note.1-1">This note is to be removed before publishing as an RFC.<a href="#section-note.1-1" class="pilcrow">¶</a></p>
 <p id="section-note.1-2">
-        The latest revision of this draft can be found at <span><a href="https://example.com/LATEST">https://example.com/LATEST</a></span>.
-        Status information for this document may be found at <span><a href="https://datatracker.ietf.org/doc/draft-todo-yourname-protocol/">https://datatracker.ietf.org/doc/draft-todo-yourname-protocol/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
+        Status information for this document may be found at <span><a href="https://datatracker.ietf.org/doc/draft-todo-current-problem/">https://datatracker.ietf.org/doc/draft-todo-current-problem/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
 <p id="section-note.1-3">
         Discussion of this document takes place on the
-        WG Working Group mailing list (<span><a href="mailto:WG@example.com">mailto:WG@example.com</a></span>),
-        which is archived at <span><a href="https://example.com/WG">https://example.com/WG</a></span>.<a href="#section-note.1-3" class="pilcrow">¶</a></p>
-<p id="section-note.1-4">Source for this draft and an issue tracker can be found at
-        <span><a href="https://github.com/USER/REPO">https://github.com/USER/REPO</a></span>.<a href="#section-note.1-4" class="pilcrow">¶</a></p>
+        TBD Non-Working Group mailing list (<span><a href="mailto:km-fs-pcs@ietf.org">mailto:km-fs-pcs@ietf.org</a></span>),
+        which is archived at <span><a href="https://mailarchive.ietf.org/arch/browse/km-fs-pcs/">https://mailarchive.ietf.org/arch/browse/km-fs-pcs/</a></span>.
+        Subscribe at <span><a href="https://www.ietf.org/mailman/listinfo/km-fs-pcs/">https://www.ietf.org/mailman/listinfo/km-fs-pcs/</a></span>.<a href="#section-note.1-3" class="pilcrow">¶</a></p>
 </section>
 <div id="status-of-memo">
 <section id="section-boilerplate.1">
@@ -1147,77 +1185,504 @@ svg {
             <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
-            <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-conventions-and-definitions" class="internal xref">Conventions and Definitions</a></p>
+            <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-problem-statement" class="internal xref">Problem Statement</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1" class="keepWithNext"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+            <p id="section-toc.1-1.3.1" class="keepWithNext"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-terminology" class="internal xref">Terminology</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
-            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-use-cases" class="internal xref">Use Cases</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1">
+                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-space" class="internal xref">Space</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2">
+                <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="auto internal xref">4.2</a>.  <a href="#name-internet-of-thing-and-opera" class="internal xref">Internet of Thing and Operational Technology Systems</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.3">
+                <p id="section-toc.1-1.4.2.3.1"><a href="#section-4.3" class="auto internal xref">4.3</a>.  <a href="#name-virtual-private-networks" class="internal xref">Virtual Private Networks</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.4">
+                <p id="section-toc.1-1.4.2.4.1"><a href="#section-4.4" class="auto internal xref">4.4</a>.  <a href="#name-unidirectional-communicatio" class="internal xref">Unidirectional Communications</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-limitations-of-current-solu" class="internal xref">Limitations of Current Solutions</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-basic-requirements" class="internal xref">Basic Requirements</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-address" class="internal xref">Author's Address</a></p>
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
+            <p id="section-toc.1-1.9.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
+            <p id="section-toc.1-1.10.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-address" class="internal xref">Author's Address</a></p>
 </li>
         </ul>
 </nav>
 </section>
 </div>
-<div id="intro">
+<div id="introduction">
 <section id="section-1">
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">TODO Introduction<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-1">The IETF has developed many protocols that are widely deployed. Many of
+these follow a synchronous design pattern, one where clients and servers
+use continuous, real-time interactive sessions. Protocols that support
+web browsers are among the best known and they fit this paradigm well.
+If you are browsing the Internet, this is the model you want. There are
+other cases where an asynchronous design pattern has advantages.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">Those cases arise in network environments with high latency, and with
+unreliable links that come and go: networks with the potential for long
+delays and many disruptions. They are not the only cases; classic
+server-to-server communication applies as well. Session-based protocols
+are not ideal there, because re-establishing a session requires a new
+handshake, and a new handshake is time consuming and therefore bandwidth
+and resource consuming as well. Session resumption is the usual answer
+to this objection, and it has been claimed as sufficient. It is not, for
+two reasons developed at section 5: resumption does not preserve forward
+secrecy and post-compromise security across an outage of operational
+length, and it does not spread the post-quantum cost of the association
+across its life.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-3">This document concerns the key management aspects of establishing and
+updating links between client and server. It examines why a Continuous
+Key Agreement protocol can provide new strategies in certain network
+environments, and it provides high level requirements for a solution.<a href="#section-1-3" class="pilcrow">¶</a></p>
+<p id="section-1-4">Three limits of scope are stated at the outset because each has been
+misread previously. The problem statement and use cases are not intended
+to apply to web browsers. They are restricted to the two-party case;
+some Continuous Key Agreement protocols support group keys and those are
+not in scope here. And a Continuous Key Agreement protocol need not be
+an application layer protocol: the construction discussed here supplies
+key schedule and ratcheting machinery to network and transport layer
+security, and is not a proposal to carry an application layer protocol
+in the network layer.<a href="#section-1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="conventions-and-definitions">
+<div id="problem-statement">
 <section id="section-2">
-      <h2 id="name-conventions-and-definitions">
-<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-conventions-and-definitions" class="section-name selfRef">Conventions and Definitions</a>
+      <h2 id="name-problem-statement">
+<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-problem-statement" class="section-name selfRef">Problem Statement</a>
       </h2>
-<p id="section-2-1">The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>", "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>", "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
-"<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as
-described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they
-appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="security">
-<section id="section-3">
-      <h2 id="name-security-considerations">
-<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
-      </h2>
-<p id="section-3-1">TODO Security<a href="#section-3-1" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="iana">
-<section id="section-4">
-      <h2 id="name-iana-considerations">
-<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
-      </h2>
-<p id="section-4-1">This document has no IANA actions.<a href="#section-4-1" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="sec-normative-references">
-<section id="section-5">
-      <h2 id="name-normative-references">
-<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
-      </h2>
-<dl class="references">
-<dt id="RFC2119">[RFC2119]</dt>
-      <dd>
-<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC8174">[RFC8174]</dt>
-    <dd>
-<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
-<dd class="break"></dd>
+<p id="section-2-1">Two distinct properties are both commonly described as asynchronicity,
+and conflating them has obscured what is being asked for. The recap
+meeting of 7 August recorded this as a specific source of confusion at
+IETF 126.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-2-2"><em>1.</em> Asynchronous Network:<a href="#section-2-2" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-2-3">
+        <dt id="section-2-3.1">What it means:</dt>
+        <dd style="margin-left: 1.5em" id="section-2-3.2">
+          <p id="section-2-3.2.1">The network does not guarantee that both parties are
+reachable at the same time. Delivery may be delayed,
+store and forward, or subject to contact windows.<a href="#section-2-3.2.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-2-3.3">What it does not mean:</dt>
+        <dd style="margin-left: 1.5em" id="section-2-3.4">
+          <p id="section-2-3.4.1">It says nothing about how keys are managed. A
+protocol can operate over such a network using
+entirely interactive key agreement, and fail for that
+reason.<a href="#section-2-3.4.1" class="pilcrow">¶</a></p>
+</dd>
+      <dd class="break"></dd>
 </dl>
+<p id="section-2-4"><em>2.</em> Asynchronous Key Update:<a href="#section-2-4" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-2-5">
+        <dt id="section-2-5.1">What it means:</dt>
+        <dd style="margin-left: 1.5em" id="section-2-5.2">
+          <p id="section-2-5.2.1">A party can advance the shared key state without a live
+exchange with its peer. The update is valid when the peer
+receives it, whenever that is.<a href="#section-2-5.2.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-2-5.3">What it does not mean:</dt>
+        <dd style="margin-left: 1.5em" id="section-2-5.4">
+          <p id="section-2-5.4.1">It does not require an asynchronous network. A
+protocol on a well connected link may still need this in
+order to rekey without paying for a fresh handshake.<a href="#section-2-5.4.1" class="pilcrow">¶</a></p>
+</dd>
+      <dd class="break"></dd>
+</dl>
+<p id="section-2-6">The requirement in this document is for the second. An asynchronous
+network is not the requirement itself.<a href="#section-2-6" class="pilcrow">¶</a></p>
+<p id="section-2-7">Five problems follow.<a href="#section-2-7" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-2-8">
+<li id="section-2-8.1">
+          <span class="break"></span><dl class="dlParallel" id="section-2-8.1.1">
+            <dt id="section-2-8.1.1.1">Amortization of post-quantum cost:</dt>
+            <dd style="margin-left: 1.5em" id="section-2-8.1.1.2">
+              <p id="section-2-8.1.1.2.1">Post-quantum key material and signatures are large relative to the
+payloads carried on constrained links. Where a handshake recurs, its
+cost is not amortized over a long session; it recurs with it, and
+competes directly with the traffic the link exists to carry. Spreading
+that overhead is already practiced at scale: Signal spreads
+post-quantum overhead, which is otherwise burdensome, across its
+updates rather than paying it in one exchange.<a href="#section-2-8.1.1.2.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+</dl>
+</li>
+        <li id="section-2-8.2">
+          <span class="break"></span><dl class="dlParallel" id="section-2-8.2.1">
+            <dt id="section-2-8.2.1.1">Lack of asynchronicity:</dt>
+            <dd style="margin-left: 1.5em" id="section-2-8.2.1.2">
+              <p id="section-2-8.2.1.2.1">Interactive key agreement requires both parties to compute the update
+together in a live exchange; neither can advance the key state alone. On
+links subject to contact windows, propagation delay, or interruption,
+the handshake becomes the operation most likely to fail and the one whose
+failure is hardest to recover.<a href="#section-2-8.2.1.2.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+</dl>
+</li>
+        <li id="section-2-8.3">
+          <span class="break"></span><dl class="dlParallel" id="section-2-8.3.1">
+            <dt id="section-2-8.3.1.1">Lack of uninterrupted resumption after network failure:</dt>
+            <dd style="margin-left: 1.5em" id="section-2-8.3.1.2">
+              <p id="section-2-8.3.1.2.1">Where a session must be re-established, the cost is paid again in full.
+Mechanisms that reduce that cost exist, and section 5 sets out why they
+are not sufficient for the environments described here.<a href="#section-2-8.3.1.2.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+</dl>
+</li>
+        <li id="section-2-8.4">
+          <span class="break"></span><dl class="dlParallel" id="section-2-8.4.1">
+            <dt id="section-2-8.4.1.1">Forward secrecy and post-compromise security under intermittent connectivity:</dt>
+            <dd style="margin-left: 1.5em" id="section-2-8.4.1.2">
+              <p id="section-2-8.4.1.2.1">An association that never rekeys cannot recover from compromise. An
+association that can only rekey interactively cannot rekey when the peer
+is unreachable, which in these environments is much of the time. Both
+properties therefore depend on updates that either peer can initiate
+independently.<a href="#section-2-8.4.1.2.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+</dl>
+</li>
+        <li id="section-2-8.5">
+          <span class="break"></span><dl class="dlParallel" id="section-2-8.5.1">
+            <dt id="section-2-8.5.1.1">Per device update management:</dt>
+            <dd style="margin-left: 1.5em" id="section-2-8.5.1.2">
+              <p id="section-2-8.5.1.2.1">Network links today rekey on an all-or-nothing basis. With asynchronous
+updates, a network manager can set the update frequency of each device
+according to its power and capability, and schedule updates so they do
+not disrupt workloads. Not disrupting workloads matters both to
+post-quantum adoption and to network management.<a href="#section-2-8.5.1.2.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+</dl>
+</li>
+      </ol>
+</section>
+</div>
+<div id="terminology">
+<section id="section-3">
+      <h2 id="name-terminology">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-terminology" class="section-name selfRef">Terminology</a>
+      </h2>
+<span class="break"></span><dl class="dlParallel" id="section-3-1">
+        <dt id="section-3-1.1">Continuous Key Agreement protocol:</dt>
+        <dd style="margin-left: 1.5em" id="section-3-1.2">
+          <p id="section-3-1.2.1">A cryptographic protocol with three properties: asynchronous design,
+propose and commit actions, and ratcheting.<a href="#section-3-1.2.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-1.3">Forward secrecy:</dt>
+        <dd style="margin-left: 1.5em" id="section-3-1.4">
+          <p id="section-3-1.4.1">Compromise of current key material does not expose traffic already
+sent.<a href="#section-3-1.4.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-1.5">Post-compromise security:</dt>
+        <dd style="margin-left: 1.5em" id="section-3-1.6">
+          <p id="section-3-1.6.1">An association can recover after a compromise, so that an adversary
+who obtains key material does not retain access indefinitely.<a href="#section-3-1.6.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-1.7">Post-quantum cryptography:</dt>
+        <dd style="margin-left: 1.5em" id="section-3-1.8">
+          <p id="section-3-1.8.1">Cryptography secure against an adversary with a cryptanalytically
+relevant quantum computer.<a href="#section-3-1.8.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-1.9">Amortization of post-quantum cost:</dt>
+        <dd style="margin-left: 1.5em" id="section-3-1.10">
+          <p id="section-3-1.10.1">Spreading the cost of post-quantum key establishment across the life
+of an association through many small updates, rather than paying it in
+full at each handshake.<a href="#section-3-1.10.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-1.11">Bundle Protocol:</dt>
+        <dd style="margin-left: 1.5em" id="section-3-1.12">
+          <p id="section-3-1.12.1">The store and forward protocol used in delay tolerant networking.<a href="#section-3-1.12.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-1.13">Zero round trip time resumption:</dt>
+        <dd style="margin-left: 1.5em" id="section-3-1.14">
+          <p id="section-3-1.14.1">A mechanism that allows application data to be sent with the first
+flight of a resumed connection, at a cost in replay protection.<a href="#section-3-1.14.1" class="pilcrow">¶</a></p>
+</dd>
+      <dd class="break"></dd>
+</dl>
+</section>
+</div>
+<div id="use-cases">
+<section id="section-4">
+      <h2 id="name-use-cases">
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-use-cases" class="section-name selfRef">Use Cases</a>
+      </h2>
+<p id="section-4-1">Each case states the environment, why the current handshake does not fit
+it, and what is disputed. The disputes are recorded here rather than
+omitted, because they are known and a reader who finds them later reads
+them as omissions.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-2">Numbers are deliberately absent. Where a link budget, a contact window
+duration or an outage length would settle a case, that is said rather
+than estimated.<a href="#section-4-2" class="pilcrow">¶</a></p>
+<aside id="section-4-3">
+        <p id="section-4-3.1">See about getting numbers.<a href="#section-4-3.1" class="pilcrow">¶</a></p>
+</aside>
+<div id="space">
+<section id="section-4.1">
+        <h3 id="name-space">
+<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-space" class="section-name selfRef">Space</a>
+        </h3>
+<p id="section-4.1-1">Everything from banking information to critical infrastructure
+management now flows through space connections. Public safety, health
+and financial transactions are all high value targets, and they motivate
+attacks against space communications.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.1-2">Two characteristics distinguish this environment. Propagation delay
+makes each round trip expensive in wall clock time. The primary source
+at section 11 records round trip times on the order of twenty to two
+hundred and fifty milliseconds in low earth and geostationary orbit,
+five to fourteen seconds for lunar communications, and between just
+under one minute and twenty three minutes between Earth and Mars
+depending on orbital positions. It also records that delay tolerant
+protocols begin tooutperform IP once round trip times exceed roughly
+two hundred milliseconds. At the upper end of that range an interactive
+handshake is impractical rather than merely slow.<a href="#section-4.1-2" class="pilcrow">¶</a></p>
+<p id="section-4.1-3">Contact windows bound the time available. An exchange that cannot
+complete inside a window does not complete late; it fails and is retried
+at the next window. Compounding this, post-quantum key material and
+signatures are larger than their classical equivalents, so the exchange
+that must fit inside the window is the one that has grown.<a href="#section-4.1-3" class="pilcrow">¶</a></p>
+<p id="section-4.1-4">Store and forward operation follows from both. The Delay Tolerant
+Networking working group is progressing key agreement for Bundle
+Protocol Security, which is independent evidence that this case is real
+and that a constituency outside this work holds it.<a href="#section-4.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="internet-of-thing-and-operational-technology-systems">
+<section id="section-4.2">
+        <h3 id="name-internet-of-thing-and-opera">
+<a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-internet-of-thing-and-opera" class="section-name selfRef">Internet of Thing and Operational Technology Systems</a>
+        </h3>
+<p id="section-4.2-1">Constrained radio links carry small payloads, and devices on them are
+frequently power limited and duty cycled. Post-quantum key material and
+signatures are large relative to those payloads, so a handshake is not
+a fixed cost paid once at session establishment. On a link that
+re-establishes often it is a recurring charge against the mission
+traffic.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
+<p id="section-4.2-2">PQC keys, which are large by classical standards, exacerbate this
+problem. For example, in a sensor network with many intermediaries where
+sensors wake up and decide they want a new PQC keyshare and to start
+sending data immediately, waiting for intermediaries to respond is
+non-ideal. Further, any ability to amortize the cost of PQC over
+multiple connections is ideal.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
+<aside id="section-4.2-3">
+          <p id="section-4.2-3.1">Disputed. It has been observed that implementations in this space could
+use symmetric keys instead, particularly if signatures are also removed.
+That is fair. The case stands where key distribution at scale, or
+recovery from compromise, makes a purely symmetric approach unworkable,
+and it should be argued on those grounds rather than on payload size
+alone.<a href="#section-4.2-3.1" class="pilcrow">¶</a></p>
+</aside>
+</section>
+</div>
+<div id="virtual-private-networks">
+<section id="section-4.3">
+        <h3 id="name-virtual-private-networks">
+<a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-virtual-private-networks" class="section-name selfRef">Virtual Private Networks</a>
+        </h3>
+<p id="section-4.3-1">Long lived associations between fixed endpoints must rekey without
+re-establishment, both to bound the value of any single compromise and
+because re-establishment costs more than some links can bear.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
+<p id="section-4.3-2">The cost of returning after an absence has been measured. In a two
+party group, a member that has missed commits pays roughly one
+millisecond and one kilobyte per missed commit to reach the current
+epoch, measured at five, ten, twenty, fifty and one hundred missed
+commits. The cost is therefore linear in the length of the absence
+rather than fixed, which is a real constraint, and it is still
+materially cheaper than re-establishing a session and paying the
+post-quantum handshake again.<a href="#section-4.3-2" class="pilcrow">¶</a></p>
+<aside id="section-4.3-3">
+          <p id="section-4.3-3.1">Disputed. Session resumption with connection identifiers addresses part
+of this, and the objection is expected. The case stands only where
+resumption does not preserve the security properties across an outage
+of operational length, and section 5 addresses why that is so.<a href="#section-4.3-3.1" class="pilcrow">¶</a></p>
+</aside>
+</section>
+</div>
+<div id="unidirectional-communications">
+<section id="section-4.4">
+        <h3 id="name-unidirectional-communicatio">
+<a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-unidirectional-communicatio" class="section-name selfRef">Unidirectional Communications</a>
+        </h3>
+<p id="section-4.4-1">Radio transmissions inherently reveal the location of the sender;
+returning delivery acknowledgements would be enough to divulge the
+sender's location. For use cases where privacy is highly sensitive,
+unidirectional communications, in receive only mode, is a requirement.
+A CKA protocol provides the best defense.<a href="#section-4.4-1" class="pilcrow">¶</a></p>
+<aside id="section-4.4-2">
+          <p id="section-4.4-2.1">Disputed. In the case of unidirectional communications, the sender does
+not know whether packets were delivered so there is a question about the
+amount of survivability needed for lost key updates. CKA (Continuous Key
+Agreement) protocols are probably the best you can get in these
+unidirectional cases.<a href="#section-4.4-2.1" class="pilcrow">¶</a></p>
+</aside>
+</section>
+</div>
+</section>
+</div>
+<div id="limitations-of-current-solutions">
+<section id="section-5">
+      <h2 id="name-limitations-of-current-solu">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-limitations-of-current-solu" class="section-name selfRef">Limitations of Current Solutions</a>
+      </h2>
+<p id="section-5-1">This document does not argue against the extended key update work. The
+most common objection heard at IETF 126 was that effort should go there
+rather than to something new, and that objection deserves a direct
+answer rather than silence.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-2">For both QUIC and TLS the central issue is the absence of native support
+for post-compromise security. An extended key update mechanism is being
+developed to add it to both. Neither specification is complete, and the
+associated proofs are not complete either. What follows is a statement
+of what remains uncovered once that work lands, not a claim that it
+should not proceed.<a href="#section-5-2" class="pilcrow">¶</a></p>
+<p id="section-5-3">QUIC supports stateful connections using session resumption and zero
+round trip time resumption, and these sacrifice security for efficiency
+by reusing previous connection state. The QUIC designers have advised
+disabling these features because of privacy concerns and replay
+vulnerabilities, which makes them ill-advised as a means of addressing
+latency and handshake overhead in the environments described here.
+Despite those warnings, early testing of QUIC in space systems has
+specifically examined the zero round trip time option, given the latency
+cost of secure session establishment. QUIC also does not offer
+post-compromise security once keys are lost, including in its session
+resumption option.<a href="#section-5-3" class="pilcrow">¶</a></p>
+<p id="section-5-4">Neither QUIC nor TLS provides a means of amortizing the computational
+and bandwidth cost of post-quantum algorithms across a long-lived
+association. Each establishment pays that cost in full.<a href="#section-5-4" class="pilcrow">¶</a></p>
+<p id="section-5-5">Two points of maturity are worth recording, because the proposal is
+sometimes read as untested. A variant replacing the QUIC handshake with
+a continuous key agreement protocol has been designed, implemented as a
+prototype, benchmarked, and analyzed in a formal cryptographic model
+with a security proof. Separately, an integration with Bundle Protocol
+Security has been implemented against the Interplanetary Overlay
+Network and Bundle Protocol Security reference implementations, with
+the source published, and its costs measured against group size. Both
+are cited at section 11.<a href="#section-5-5" class="pilcrow">¶</a></p>
+<p id="section-5-6">Those implementations also qualify a claim that is often made for this
+approach. The theoretical scaling advantage over pairwise handshakes is
+logarithmic in group size, and the measured behavior is generally
+linear, with logarithmic scaling appearing only at ideal group sizes.
+The advantage over repeated handshakes remains, and it is smaller than
+the asymptotic figure suggests. This document states the measured
+position rather than the theoretical one.<a href="#section-5-6" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="basic-requirements">
+<section id="section-6">
+      <h2 id="name-basic-requirements">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-basic-requirements" class="section-name selfRef">Basic Requirements</a>
+      </h2>
+<p id="section-6-1">The wording is preserved from the presentations at IETF 125 and IETF
+126.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6-2.1">
+          <p id="section-6-2.1.1">The key management MUST: Support Layer 3 and Layer 4. Asynchronous
+key updates. Post-quantum cryptography. Forward secrecy.
+Post-compromise security. Protocol formal analysis.<a href="#section-6-2.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-6-2.2">
+          <p id="section-6-2.2.1">The key management SHOULD: Asynchronous communication. Support groups
+and peer to peer protocols.<a href="#section-6-2.2.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-6-3">A note on the groups item, since this document is restricted to the two
+party case: the item is carried from the primary source, which lists
+scalability to groups of devices for Bundle Protocol use specifically.
+The two positions are not contradictory, and section 7 gives the reason
+the two party case is pursued here.<a href="#section-6-3" class="pilcrow">¶</a></p>
+<p id="section-6-4">Expressed in terms of the environments at section 4, a Continuous Key
+Agreement protocol meeting these requirements needs to:<a href="#section-6-4" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6-5.1">
+          <p id="section-6-5.1.1">support high latency networks with the minimum practicable number of
+round trips<a href="#section-6-5.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-6-5.2">
+          <p id="section-6-5.2.1">allow either peer to initiate a key update independently, at regular
+or predetermined intervals<a href="#section-6-5.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-6-5.3">
+          <p id="section-6-5.3.1">allow the parties to update at different rates, so the functionality
+and risk profile of each device can be adjusted independently<a href="#section-6-5.3.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-6-5.4">
+          <p id="section-6-5.4.1">allow the update frequency of each device to be set according to its
+power and capability, without disrupting workloads<a href="#section-6-5.4.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-6-5.5">
+          <p id="section-6-5.5.1">support keying at either or both the network and the transport layer<a href="#section-6-5.5.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-6-5.6">
+          <p id="section-6-5.6.1">support post-quantum cryptography with amortization options<a href="#section-6-5.6.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-6-5.7">
+          <p id="section-6-5.7.1">ensure current session keys are protected if previous session keys are
+compromised, which is forward secrecy<a href="#section-6-5.7.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-6-5.8">
+          <p id="section-6-5.8.1">such a protocol is not required to be stateless, because unlike
+Internet use cases there is no risk of exhaustion from very large
+numbers of connection establishments, and stateful protocols may
+therefore offer better security or functionality. The environments
+described at section 4 involve relatively few paired identities with
+associations that may persist for years, which is what makes stateful
+operation available at all.<a href="#section-6-5.8.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+</section>
+</div>
+<div id="security-considerations">
+<section id="section-7">
+      <h2 id="name-security-considerations">
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+      </h2>
+<p id="section-7-1">This document is entirely about security. It is a problem statement,
+and the security considerations for specific solutions will be discussed
+in solutions documents.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-2">As stated at section 1, this document concerns two party use cases
+rather than groups. That scope is deliberate. A mechanism that admits a
+third party to a two party association raises concerns about
+surveillance capability which are separate from, and likely to attract
+more opposition than, the engineering questions raised here.<a href="#section-7-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="iana-considerations">
+<section id="section-8">
+      <h2 id="name-iana-considerations">
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+      </h2>
+<p id="section-8-1">This document has no IANA actions.<a href="#section-8-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="acknowledgments">
