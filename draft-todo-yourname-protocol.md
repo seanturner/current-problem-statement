@@ -271,6 +271,33 @@ and it should be argued on those grounds rather than on payload size
 alone.
 </aside>
 
+### Telemetry Collection
+
+A telemetry collection service places collectors inside networks it does not
+control, and each collector uploads continuously to a central platform over a
+session-based security protocol. A collector may be many hops from that
+platform, and neither the number of hops nor the latency they add is within the
+operator's control. The volume is high and unbroken, so the channel is held
+open for the life of the deployment. Rotation frequency is not the operator's
+choice: it follows from external policy, whether regulatory, contractual or
+organizational, in particular to achieve post-compromise security.
+
+For this use case, not only must rekeying be cheap but it also must not
+interrupt the upload, because a collector that stops sending accumulates a
+backlog it may not be able to drain. Latency makes any exchange that must
+complete before data resumes expensive, and an interruption is the pathological
+case of the same problem: a link whose latency is unbounded until it returns.
+There is a need for key update and resumption mechanisms that provide post-
+compromise security without interrupting the data flow.
+
+<aside markdown="block">
+Disputed. If a key update is lost in transit, it is not settled what the
+parties should do. The simplest answer is to accept the loss of
+the records affected and continue, which is tolerable in some environments.
+However, a more robust recovery mechanism should be a problem to solve for a
+working group rather than something this document settles.
+</aside>
+
 ## Virtual Private Networks
 
 Long lived associations between fixed endpoints must rekey without
