@@ -306,93 +306,86 @@ unidirectional cases.
 
 # Limitations of Current Solutions
 
-This document does not argue against the extended key update work. The
-most common objection heard at IETF 126 was that effort should go there
-rather than to something new, and that objection deserves a direct
-answer rather than silence.
-
-For both QUIC and TLS the central issue is the absence of native support
-for post-compromise security. An extended key update mechanism is being
-developed to add it to both. Neither specification is complete, and the
-associated proofs are not complete either. What follows is a statement
-of what remains uncovered once that work lands, not a claim that it
-should not proceed.
+Extended key update mechanisms are being developed to add
+post-compromise security to QUIC and TLS. The specifications and their
+security proofs are not yet complete. This work addresses part of the
+problem described here, but the following limitations remain.
 
 QUIC supports resumption, and it permits 0-RTT data on a new connection.
-0-RTT reuses information from a previous connection and sacrifices replay
-protection for efficiency. The QUIC designers have advised disabling
-these features because of privacy concerns and replay vulnerabilities,
-which makes them ill-advised as a means of addressing latency and
-handshake overhead in the environments described here.
-Despite those warnings, early testing of QUIC in space systems has
-specifically examined 0-RTT, given the latency cost of secure connection
-establishment. QUIC also does not offer post-compromise security once
-keys are lost, including when resumption is used.
+0-RTT reuses information from a previous connection and does not provide
+inherent replay protection. Its privacy and replay risks can make it
+unsuitable for reducing latency and handshake overhead in the use cases
+described here. Experiments with QUIC in space systems have evaluated
+0-RTT to reduce the cost of secure connection establishment on
+high-latency paths. Neither resumption nor 0-RTT provides
+post-compromise security after key material is compromised.
 
-Neither QUIC nor TLS provides a means of amortizing the computational
-and bandwidth cost of post-quantum algorithms across a long-lived
-connection. Each establishment pays that cost in full.
+The standardized QUIC and TLS key update mechanisms do not introduce
+fresh post-quantum key material. Obtaining such material requires another
+key exchange, with the associated computation and bandwidth cost. The
+extended key update work may address this limitation.
 
-Two points of maturity are worth recording, because the proposal is
-sometimes read as untested. A variant replacing the QUIC handshake with
-a Continuous Key Agreement protocol has been designed, implemented as a
-prototype, benchmarked, and analyzed in a formal cryptographic model
-with a security proof. Separately, an integration with Bundle Protocol
-Security has been implemented against the Interplanetary Overlay
-Network and Bundle Protocol Security reference implementations. The published
-source and cost measurements are cited in Section 11.
+Existing work on Continuous Key Agreement includes a prototype that
+replaces the QUIC handshake. It has been benchmarked and analyzed in a
+formal cryptographic model with a security proof. A separate
+implementation integrates Continuous Key Agreement with Bundle Protocol
+Security and has been tested with the Interplanetary Overlay Network and
+Bundle Protocol Security reference implementations. Section 11 cites the
+published source and cost measurements.
 
 # Basic Requirements
 
 These requirements are adapted from the presentations at IETF 125 and
 IETF 126.
 
-* The key management MUST: Support Layer 3 and Layer 4. Asynchronous
-key updates. Post-quantum cryptography. Forward secrecy.
-Post-compromise security. Protocol formal analysis.
+The key management protocol MUST:
 
-Expressed in terms of the environments in Section 4, a Continuous Key
-Agreement protocol meeting these requirements needs to:
+* support key management for both network-layer and transport-layer
+protocols.
+
+* support asynchronous key updates.
+
+* support post-quantum cryptography.
+
+* provide forward secrecy and post-compromise security.
+
+* be accompanied by a formal security analysis.
+
+The use cases in Section 4 add the following requirements. A Continuous
+Key Agreement protocol needs to:
 
 * support high-latency networks with the minimum practicable number of
-round trips
+round trips.
 
-* allow either endpoint to initiate a key update independently, at
-regular or predetermined intervals
+* allow either endpoint to initiate a key update independently.
 
-* allow the endpoints to update their key state at different rates, so
-the functionality and risk profile of each endpoint can be adjusted
-independently
+* allow each endpoint to use a separate key update frequency and
+schedule, including regular or predetermined intervals, based on its
+role, risk profile, power, capabilities, and workload.
 
-* allow the key update frequency of each endpoint to be set according to
-its power and capability, without disrupting workloads
+* allow a deployment to apply keying at the network layer, transport
+layer, or both.
 
-* support keying at either or both the network and the transport layer
+* distribute post-quantum key updates throughout the life of a
+connection.
 
-* support post-quantum cryptography with amortization options
+* ensure that compromise of an endpoint’s current key state does not reveal
+traffic protected using earlier key states.
 
-* ensure traffic sent before current keying material is compromised
-remains protected, which is forward secrecy
-
-* such a protocol is not required to be stateless, because unlike
-Internet use cases there is no risk of exhaustion from very large
-numbers of connection establishments, and stateful protocols may
-therefore offer better security or functionality. The environments
-described in Section 4 involve relatively few paired identities with
-connections that may persist for years, which is what makes stateful
-operation available at all.
+A solution need not be stateless. The use cases in Section 4 involve
+relatively few paired identities and connections that may persist for
+years. Their scale can make stateful protocols practical, including when
+retained state provides better security or functionality.
 
 # Security Considerations
 
-This document is entirely about security. It is a problem statement,
-and the security considerations for specific solutions will be discussed
-in solutions documents.
+A solution that meets the requirements listed in this document needs to define
+its threat model and analyze the security of its protocol mechanisms.
 
-As stated in Section 1, this document concerns two-party use cases
-rather than groups. That scope is deliberate. A mechanism that admits a
-third party to a two-party connection raises concerns about
-surveillance capability which are separate from, and likely to attract
-more opposition than, the engineering questions raised here.
+The scope is limited to connections between two endpoints. Allowing a third
+party to participate in the key agreement changes the trust model and may enable
+surveillance. Protocols that involve third parties or groups require separate
+security and privacy analysis and are outside the scope of this document.
 
 # IANA Considerations
 
