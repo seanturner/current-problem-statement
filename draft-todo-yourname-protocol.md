@@ -339,17 +339,8 @@ a Continuous Key Agreement protocol has been designed, implemented as a
 prototype, benchmarked, and analyzed in a formal cryptographic model
 with a security proof. Separately, an integration with Bundle Protocol
 Security has been implemented against the Interplanetary Overlay
-Network and Bundle Protocol Security reference implementations, with
-the source published, and its costs measured against group size. Both
-are cited in Section 11.
-
-Those implementations also qualify a claim that is often made for this
-approach. The theoretical scaling advantage over pairwise handshakes is
-logarithmic in group size, and the measured behavior is generally
-linear, with logarithmic scaling appearing only at ideal group sizes.
-The advantage over repeated handshakes remains, and it is smaller than
-the asymptotic figure suggests. This document states the measured
-position rather than the theoretical one.
+Network and Bundle Protocol Security reference implementations. The published
+source and cost measurements are cited in Section 11.
 
 # Basic Requirements
 
@@ -359,15 +350,6 @@ IETF 126.
 * The key management MUST: Support Layer 3 and Layer 4. Asynchronous
 key updates. Post-quantum cryptography. Forward secrecy.
 Post-compromise security. Protocol formal analysis.
-
-* The key management SHOULD: Operate over asynchronous networks. Support
-groups and peer-to-peer protocols.
-
-A note on the groups item, since this document is restricted to the
-two-party case: the item is carried from the primary source, which lists
-scalability to groups of devices for Bundle Protocol use specifically.
-The two positions are not contradictory, and Section 7 gives the reason
-the two-party case is pursued here.
 
 Expressed in terms of the environments in Section 4, a Continuous Key
 Agreement protocol meeting these requirements needs to:
