@@ -102,6 +102,16 @@ in the network layer.
 
 # Terminology
 
+Asynchronous network:
+: The network does not guarantee that both parties are reachable at the
+same time. Delivery may be delayed, store and forward, or subject to
+contact windows.
+
+Asynchronous key update:
+: A party can advance the shared key state without a live exchange with
+its peer. The update is valid when the peer receives it, whenever that
+is.
+
 Continuous Key Agreement protocol:
 : A cryptographic protocol with three properties: asynchronous design,
 propose and commit actions, and ratcheting.
@@ -133,38 +143,11 @@ flight of a resumed connection, at a cost in replay protection.
 
 # Problem Statement
 
-Two distinct properties are both commonly described as asynchronicity,
-and conflating them has obscured what is being asked for. The recap
-meeting of 7 August recorded this as a specific source of confusion at
-IETF 126.
-
-*1.* Asynchronous Network:
-
-What it means:
-: The network does not guarantee that both parties are
-reachable at the same time. Delivery may be delayed,
-store and forward, or subject to contact windows.
-
-What it does not mean:
-: It says nothing about how keys are managed. A
-protocol can operate over such a network using
-entirely interactive key agreement, and fail for that
-reason.
-
-*2.* Asynchronous Key Update:
-
-What it means:
-: A party can advance the shared key state without a live
-exchange with its peer. The update is valid when the peer
-receives it, whenever that is.
-
-What it does not mean:
-: It does not require an asynchronous network. A
-protocol on a well connected link may still need this in
-order to rekey without paying for a fresh handshake.
-
-The requirement in this document is for the second. An asynchronous
-network is not the requirement itself.
+Conflating an asynchronous network with an asynchronous key update has
+obscured what is being asked for. The recap meeting of 7 August recorded
+this as a specific source of confusion at IETF 126. The requirement in
+this document is for an asynchronous key update. An asynchronous network
+is not the requirement itself.
 
 Five problems follow.
 
