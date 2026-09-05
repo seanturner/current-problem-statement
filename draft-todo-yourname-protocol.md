@@ -268,24 +268,25 @@ alone.
 
 ## Virtual Private Networks
 
-Long-lived connections between fixed endpoints must support key updates
-without reestablishment, both to bound the value of any single compromise
-and because reestablishment costs more than some links can bear.
+VPN connections are often long-lived. Establishing a post-quantum-secure
+connection requires an initial post-quantum exchange, whose cost is paid in full
+at connection establishment. After establishment, a Continuous Key Agreement
+protocol can introduce fresh post-quantum key contributions through in-band key
+updates without repeating a complete authenticated key exchange. The cost of
+subsequent post-quantum key updates can therefore be distributed throughout the
+life of the connection rather than being concentrated in repeated handshakes.
 
-The cost of returning after an absence has been measured. In a two-party
-group, a member that has missed Commits pays roughly one millisecond and
-one kilobyte per missed Commit to reach the current epoch, measured at
-five, ten, twenty, fifty and one hundred missed Commits. The cost is
-therefore linear in the length of the absence rather than fixed, which
-is a real constraint, and it is still materially cheaper than
-reestablishing a connection and paying the post-quantum handshake again.
+Asynchronous key updates also give an operator independent control over when and
+how often each endpoint advances its key state. Key update schedules can use
+independent key updates to account for security policy, workload, power, and
+available network capacity.
 
-<aside markdown="block">
-Disputed. QUIC connection migration and TLS or QUIC resumption address
-part of this, and the objection is expected. The case stands only where
-resumption does not preserve the security properties across an outage of
-operational length, and Section 5 addresses why that is so.
-</aside>
+This control is useful when a VPN client has asymmetric upload and download
+availability. For example, a client with limited upload capacity can schedule
+its outbound key updates for periods when that capacity is available while
+continuing to receive key updates over a less constrained downstream path. The
+endpoints need not initiate key updates at the same rate or on the same
+schedule.
 
 ## Unidirectional Communications
 
