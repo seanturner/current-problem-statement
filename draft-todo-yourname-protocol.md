@@ -100,6 +100,37 @@ key schedule and ratcheting machinery to network and transport layer
 security, and is not a proposal to carry an application layer protocol
 in the network layer.
 
+# Terminology
+
+Continuous Key Agreement protocol:
+: A cryptographic protocol with three properties: asynchronous design,
+propose and commit actions, and ratcheting.
+
+Forward secrecy:
+: Compromise of current key material does not expose traffic already
+sent.
+
+Post-compromise security:
+: An association can recover after a compromise, so that an adversary
+who obtains key material does not retain access indefinitely.
+
+Post-quantum cryptography:
+: Cryptography secure against an adversary with a cryptanalytically
+relevant quantum computer.
+
+Amortization of post-quantum cost:
+: Spreading the cost of post-quantum key establishment across the life
+of an association through many small updates, rather than paying it in
+full at each handshake.
+
+Bundle Protocol:
+: The store and forward protocol used in delay tolerant networking.
+
+Zero round trip time resumption:
+: A mechanism that allows application data to be sent with the first
+flight of a resumed connection, at a cost in replay protection.
+
+
 # Problem Statement
 
 Two distinct properties are both commonly described as asynchronicity,
@@ -171,36 +202,6 @@ updates, a network manager can set the update frequency of each device
 according to its power and capability, and schedule updates so they do
 not disrupt workloads. Not disrupting workloads matters both to
 post-quantum adoption and to network management.
-
-# Terminology
-
-Continuous Key Agreement protocol:
-: A cryptographic protocol with three properties: asynchronous design,
-propose and commit actions, and ratcheting.
-
-Forward secrecy:
-: Compromise of current key material does not expose traffic already
-sent.
-
-Post-compromise security:
-: An association can recover after a compromise, so that an adversary
-who obtains key material does not retain access indefinitely.
-
-Post-quantum cryptography:
-: Cryptography secure against an adversary with a cryptanalytically
-relevant quantum computer.
-
-Amortization of post-quantum cost:
-: Spreading the cost of post-quantum key establishment across the life
-of an association through many small updates, rather than paying it in
-full at each handshake.
-
-Bundle Protocol:
-: The store and forward protocol used in delay tolerant networking.
-
-Zero round trip time resumption:
-: A mechanism that allows application data to be sent with the first
-flight of a resumed connection, at a cost in replay protection.
 
 # Use Cases
 
