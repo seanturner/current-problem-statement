@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-09-03T01:55:29.885276+00:00",
+  "timestamp": "2026-09-06T01:45:02.637494+00:00",
   "repo": "seanturner/current-problem-statement",
   "labels": [
     {
@@ -72,5 +72,84 @@
       "comments": []
     }
   ],
-  "pulls": []
+  "pulls": [
+    {
+      "number": 2,
+      "id": "PR_kwDOT47FSM8AAAABCDeG5A",
+      "title": "Add telemetry collection use case",
+      "url": "https://github.com/seanturner/current-problem-statement/pull/2",
+      "state": "OPEN",
+      "author": "gaetan-sbt",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Add the Telemetry Collection use case, which is a generalization of SandboxAQ's sensors use case.\r\n\r\nThe main requirements it relates to is the asynchronicity of key udpates and key updates providing PCS.",
+      "createdAt": "2026-09-03T12:25:08Z",
+      "updatedAt": "2026-09-03T12:25:08Z",
+      "baseRepository": "seanturner/current-problem-statement",
+      "baseRefName": "main",
+      "baseRefOid": "8332be0e80902159ef425745c1b005e175bb929f",
+      "headRepository": "gaetan-sbt/current-problem-statement",
+      "headRefName": "add-telemetry-use-case",
+      "headRefOid": "cc5ce804179d928d73fcbc10876fa1dc0a29fdf6",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 3,
+      "id": "PR_kwDOT47FSM8AAAABCT8Smg",
+      "title": "Editorial pass with rewrite of VPN section",
+      "url": "https://github.com/seanturner/current-problem-statement/pull/3",
+      "state": "OPEN",
+      "author": "kkohbrok",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-09-05T10:25:41Z",
+      "updatedAt": "2026-09-05T10:25:41Z",
+      "baseRepository": "seanturner/current-problem-statement",
+      "baseRefName": "main",
+      "baseRefOid": "8332be0e80902159ef425745c1b005e175bb929f",
+      "headRepository": "kkohbrok/current-problem-statement",
+      "headRefName": "konrad/review",
+      "headRefOid": "0ad3ca95f26c0ef8e45dd55316286b00befd7f70",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 4,
+      "id": "PR_kwDOT47FSM8AAAABCT8hTA",
+      "title": "More invasive pass with more significant content changes based on #3",
+      "url": "https://github.com/seanturner/current-problem-statement/pull/4",
+      "state": "OPEN",
+      "author": "kkohbrok",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Based on #3.",
+      "createdAt": "2026-09-05T10:26:50Z",
+      "updatedAt": "2026-09-05T10:26:50Z",
+      "baseRepository": "seanturner/current-problem-statement",
+      "baseRefName": "main",
+      "baseRefOid": "8332be0e80902159ef425745c1b005e175bb929f",
+      "headRepository": "kkohbrok/current-problem-statement",
+      "headRefName": "konrad/rewrite",
+      "headRefOid": "fb4de8584622e6a603fdceb760cb839eff926dfc",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    }
+  ]
 }
