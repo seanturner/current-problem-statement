@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-09-06T01:45:02.637494+00:00",
+  "timestamp": "2026-09-10T01:55:58.452338+00:00",
   "repo": "seanturner/current-problem-statement",
   "labels": [
     {
@@ -85,7 +85,7 @@
       "labels": [],
       "body": "Add the Telemetry Collection use case, which is a generalization of SandboxAQ's sensors use case.\r\n\r\nThe main requirements it relates to is the asynchronicity of key udpates and key updates providing PCS.",
       "createdAt": "2026-09-03T12:25:08Z",
-      "updatedAt": "2026-09-03T12:25:08Z",
+      "updatedAt": "2026-09-09T09:25:33Z",
       "baseRepository": "seanturner/current-problem-statement",
       "baseRefName": "main",
       "baseRefOid": "8332be0e80902159ef425745c1b005e175bb929f",
@@ -96,7 +96,15 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "thomwiggers",
+          "authorAssociation": "NONE",
+          "body": "This whole paragraph text seems very \"why doesn't TLS just work for you\". If the traffic is so continuous, you can keep a TLS session alive; EKU solves the gap for rekeying.  Meanwhile if your log integrity is so important, you actually need synchronous acknowledgement of log entries to avoid truncation attacks. So using that as an argument actually weakens the argument that a CURRENT-approach works better imo.",
+          "createdAt": "2026-09-09T09:25:20Z",
+          "updatedAt": "2026-09-09T09:25:33Z"
+        }
+      ],
       "reviews": []
     },
     {
@@ -137,7 +145,7 @@
       "labels": [],
       "body": "Based on #3.",
       "createdAt": "2026-09-05T10:26:50Z",
-      "updatedAt": "2026-09-05T10:26:50Z",
+      "updatedAt": "2026-09-09T14:46:41Z",
       "baseRepository": "seanturner/current-problem-statement",
       "baseRefName": "main",
       "baseRefOid": "8332be0e80902159ef425745c1b005e175bb929f",
@@ -148,8 +156,143 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
-      "reviews": []
+      "comments": [
+        {
+          "author": "seanturner",
+          "authorAssociation": "OWNER",
+          "body": "I will go ahead and merge this, and transfer the comments to issues.",
+          "createdAt": "2026-09-09T14:46:41Z",
+          "updatedAt": "2026-09-09T14:46:41Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOT47FSM8AAAABMxqU3Q",
+          "commit": {
+            "abbreviatedOid": "fb4de85"
+          },
+          "author": "thomwiggers",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "I reviewed the version on the `main` branch, but you already tackled most of my comments here. I left a few remaining thoughts.",
+          "createdAt": "2026-09-09T09:27:31Z",
+          "updatedAt": "2026-09-09T09:34:23Z",
+          "comments": [
+            {
+              "originalPosition": 205,
+              "body": "do you want to note that symmetric ratcheting is a useful mechanism here that TLS lacks?",
+              "createdAt": "2026-09-09T09:27:31Z",
+              "updatedAt": "2026-09-09T09:34:23Z"
+            },
+            {
+              "originalPosition": 530,
+              "body": "- A weaker example in my mind. Mostly requires a symmetric ratchet. Could work well with PSK-based approach (or maybe a deployment mechanism where the initial state is established while a drone is still in a launcher?)\n- Weakness: closely related to defense applications, which may trigger pushback.",
+              "createdAt": "2026-09-09T09:32:49Z",
+              "updatedAt": "2026-09-09T09:34:23Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOT47FSM8AAAABM00GKA",
+          "commit": {
+            "abbreviatedOid": "fb4de85"
+          },
+          "author": "seanturner",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-09T14:24:03Z",
+          "updatedAt": "2026-09-09T14:24:04Z",
+          "comments": [
+            {
+              "originalPosition": 205,
+              "body": "As discussed, we should note that ratchets is an option not the only option. Add the key update and regular update provides some features.",
+              "createdAt": "2026-09-09T14:24:04Z",
+              "updatedAt": "2026-09-09T14:24:04Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOT47FSM8AAAABM093Iw",
+          "commit": {
+            "abbreviatedOid": "fb4de85"
+          },
+          "author": "thomwiggers",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-09T14:37:00Z",
+          "updatedAt": "2026-09-09T14:37:00Z",
+          "comments": [
+            {
+              "originalPosition": 658,
+              "body": "this paragraph suddenly suggests a solution exists before the properties of the solution were introduced. Probably makes sense for a later section that sketches it and then discusses these benchmarks.",
+              "createdAt": "2026-09-09T14:37:00Z",
+              "updatedAt": "2026-09-09T14:37:00Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOT47FSM8AAAABM0_uhA",
+          "commit": {
+            "abbreviatedOid": "fb4de85"
+          },
+          "author": "seanturner",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-09T14:39:02Z",
+          "updatedAt": "2026-09-09T14:39:03Z",
+          "comments": [
+            {
+              "originalPosition": 768,
+              "body": "Carlos wonders whether this is overly cautious.",
+              "createdAt": "2026-09-09T14:39:02Z",
+              "updatedAt": "2026-09-09T14:39:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOT47FSM8AAAABM1BqOw",
+          "commit": {
+            "abbreviatedOid": "fb4de85"
+          },
+          "author": "seanturner",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-09T14:41:36Z",
+          "updatedAt": "2026-09-09T14:41:36Z",
+          "comments": [
+            {
+              "originalPosition": 775,
+              "body": "@carlosaguilarmelchor make sure this is crisper and maybe a little more aggressive. More about it's 2 party and not 3, and more than 2 is dangerous.",
+              "createdAt": "2026-09-09T14:41:36Z",
+              "updatedAt": "2026-09-09T14:41:36Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOT47FSM8AAAABM1EEZw",
+          "commit": {
+            "abbreviatedOid": "fb4de85"
+          },
+          "author": "carlosaguilarmelchor",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-09T14:45:00Z",
+          "updatedAt": "2026-09-09T14:45:01Z",
+          "comments": [
+            {
+              "originalPosition": 775,
+              "body": "Proposal:\r\nThe scope is limited to connections between two endpoints. A third party that would contribute secret keying material, authenticate endpoint identities, or receive connection keys would change the trust model and require separate security and privacy analysis. One of the goals will those be to propose a solution that allows two endpoints to communicate but would prevent a third party to explicitly or implicitly also join the communication.",
+              "createdAt": "2026-09-09T14:45:00Z",
+              "updatedAt": "2026-09-09T14:45:01Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
