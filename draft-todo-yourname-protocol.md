@@ -470,12 +470,12 @@ A resumed connection cannot claim post-compromise recovery if it is based on a
 resumption secret that the attacker still knows. A solution needs to specify
 how a compromised resumption state is invalidated.
 
-The scope is limited to connections between two endpoints. A relay or delivery
-service that only forwards encrypted protocol messages need not learn the
-connection keys, as illustrated by the MLS Delivery Service model {{RFC9420}}.
-A service that contributes secret keying material, authenticates endpoint
-identities, or receives connection keys changes the trust model and requires
-separate security and privacy analysis.
+The scope is limited to connections between two endpoints. A third party that
+would contribute secret keying material, authenticate endpoint identities, or
+receive connection keys would change the trust model and require separate
+security and privacy analysis. One of the goals will those be to propose a
+solution that allows two endpoints to communicate but would prevent a third
+party to explicitly or implicitly also join the communication.
 
 Update timing, size, retransmission, and acknowledgment behavior can reveal
 endpoint activity and connectivity patterns even when the update contents are
