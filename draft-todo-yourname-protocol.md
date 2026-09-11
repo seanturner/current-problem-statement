@@ -35,7 +35,7 @@ informative:
   I-D.ietf-quic-extended-key-update:
   I-D.ietf-tls-extended-key-update:
   RFC7296:
-  RFC8446:
+  RFC9846:
   RFC9001:
   RFC9171:
   RFC9420:
@@ -66,7 +66,7 @@ long-lived connection.
 # Introduction
 
 TLS 1.3 and QUIC permit either endpoint to initiate a traffic key update
-{{RFC8446}} {{RFC9001}}. These updates are useful for limiting the amount of
+{{RFC9846}} {{RFC9001}}. These updates are useful for limiting the amount of
 traffic protected by one traffic secret. However, they apply a key
 derivation function to existing key state and do not introduce fresh keying
 material. An attacker that obtains the current state can compute the
@@ -91,7 +91,7 @@ constraints make independent initiation more valuable.
 Connection resumption addresses a different problem. TLS 1.3 resumption
 with fresh ephemeral Diffie-Hellman can provide forward secrecy for new
 1-RTT application data, while PSK-only resumption and 0-RTT data have weaker
-security properties {{RFC8446}}. Resumption does not by itself recover from
+security properties {{RFC9846}}. Resumption does not by itself recover from
 compromise if the attacker also obtained the resumption secret. Repeating
 connection establishment can also repeat the computation and bandwidth
 cost of post-quantum key exchange.
@@ -176,7 +176,7 @@ Bundle Protocol:
 0-RTT data:
 : Application data sent in the first flight of a resumed connection. TLS
 and QUIC do not provide inherent replay protection for 0-RTT data
-{{RFC8446}} {{RFC9001}}.
+{{RFC9846}} {{RFC9001}}.
 
 
 # Problem Statement
