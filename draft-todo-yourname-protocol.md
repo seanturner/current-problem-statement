@@ -347,14 +347,14 @@ document.
 
 QUIC supports resumption, and it permits 0-RTT data on a new connection.
 0-RTT data does not have the same replay protection or forward secrecy as
-1-RTT data {{RFC8446}} {{RFC9001}}. Resumption with fresh ephemeral
+1-RTT data {{RFC9846}} {{RFC9001}}. Resumption with fresh ephemeral
 Diffie-Hellman can provide forward secrecy for new 1-RTT traffic. It cannot
 provide post-compromise recovery if the attacker obtained and retains the
 resumption secret. A deployment also needs to consider the linkability of
 resumed connections and the application consequences of replayed 0-RTT data.
 
 The standardized QUIC and TLS key update mechanisms do not introduce
-fresh keying material {{RFC8446}} {{RFC9001}}. They can limit the amount
+fresh keying material {{RFC9846}} {{RFC9001}}. They can limit the amount
 of traffic protected under one traffic secret, but an attacker that knows
 the current traffic secret can derive later traffic secrets. Obtaining
 post-compromise recovery requires fresh keying material and secure
