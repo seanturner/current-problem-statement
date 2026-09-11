@@ -90,11 +90,13 @@ constraints make independent initiation more valuable.
 
 Connection resumption addresses a different problem. TLS 1.3 resumption
 with fresh ephemeral Diffie-Hellman can provide forward secrecy for new
-1-RTT application data, while PSK-only resumption and 0-RTT data have weaker
+1-RTT application data; however, PSK-only resumption and 0-RTT data have weaker
 security properties {{RFC8446}}. Resumption does not by itself recover from
-compromise if the attacker also obtained the resumption secret. Repeating
+compromise if the attacker has been able to obtain the resumption secret. Repeating
 connection establishment can also repeat the computation and bandwidth
-cost of post-quantum key exchange.
+cost of post-quantum key exchange. TLS 1.3 does not currently offer a
+mechanism for symmetric ratcheting, which is a useful mechanism to provide
+fresh keying material after connection resumption.
 
 This document concerns two-party key management. It examines continuous
 key agreement as a means of introducing fresh keying material through
