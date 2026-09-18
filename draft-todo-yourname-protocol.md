@@ -50,16 +50,15 @@ their standardized key update mechanisms derive new keys from existing
 key state. They do not introduce fresh keying material and therefore cannot
 restore security after that state has been compromised. Mechanisms that
 are currently being developed for TLS and QUIC to introduce fresh
-post-quantum keying material use an interactive exchange.
+keying material use an interactive exchange.
 
 This document considers mechanisms through which either endpoint can
 independently initiate a key update that incorporates fresh randomness and can
 provide post-compromise security. The initiator does not wait for a live
-response before sending the update, and the peer can process it later. This
+response, and the peer can process it later. This
 property is useful even when both endpoints are normally reachable because it
 allows each endpoint to schedule updates according to its constraints.
-Intermittent connectivity and long propagation delays make the property more
-valuable. Such updates can also distribute post-quantum update costs across a
+Intermittent connectivity, long propagation delays, and large post-quantum sizes make the property more valuable. Such updates can also distribute update costs across a
 long-lived connection.
 
 --- middle
@@ -76,21 +75,21 @@ same subsequent traffic secrets.
 Post-compromise security requires a key update that incorporates fresh
 randomness unknown to the attacker after the attacker loses access to the
 endpoint. The resulting fresh keying material allows the connection to recover
-confidentiality. The Extended Key Update proposals for TLS and QUIC introduce
+security. The Extended Key Update proposals for TLS and QUIC introduce
 fresh keying material through an interactive exchange
 {{I-D.ietf-tls-extended-key-update}}
 {{I-D.ietf-quic-extended-key-update}}.
 
 The property considered in this document is that either endpoint can
-independently initiate such an update without waiting for a live response from
+independently initiate and complete such an update without waiting for a live response from
 its peer. The peer can process the update later from compatible predecessor
 state. This property is useful even on a reliable network because it allows the
 endpoints to use different update schedules. Long propagation delays,
-intermittent connectivity, asymmetric bandwidth, power limits, and workload
-constraints make independent initiation more valuable.
+intermittent connectivity, asymmetric bandwidth, power limits, workload
+constraints, and large post-quantum sizes make independent initiation more valuable.
 
 Connection resumption addresses a different problem. TLS 1.3 resumption
-with fresh ephemeral Diffie-Hellman can provide forward secrecy for new
+with fresh ephemeral asymmetric key exchange can provide forward secrecy for new
 1-RTT application data, while PSK-only resumption and 0-RTT data have weaker
 security properties {{RFC9846}}. Resumption does not by itself recover from
 compromise if the attacker also obtained the resumption secret. Repeating
@@ -120,14 +119,14 @@ be limited to contact windows.
 
 Interactive key agreement:
 : Key agreement that requires a request and a corresponding response before
-the initiator can complete the agreement and use the resulting keying
+the initiator can complete the agreement and store the resulting keying
 material.
 
 Asynchronous key update:
 : A key update that either endpoint can generate without a live exchange with
 the peer. The peer can process the update later if it retains compatible
 predecessor state. A protocol defines how it handles lost, duplicated,
-reordered, stale, and concurrent updates. In this document, an asynchronous
+reordered, stale, and concurrent updates. Key confirmation may be needed to use or delete a key state. In this document, an asynchronous
 key update incorporates fresh randomness and introduces fresh keying material
 that can provide post-compromise security under the stated threat model.
 
@@ -145,11 +144,10 @@ compromise ends.
 
 Forward secrecy:
 : Protection of traffic from compromise of keying material at a later time.
-This property depends on deletion of traffic keys and the secret state from
-which they can be derived.
+This property depends on derivation of new trafiic keys and the deletion of old traffic keys and the secret state from which they can be derived.
 
 Post-compromise security:
-: The property that a connection can restore confidentiality after an
+: The property that a connection can restore security after an
 attacker has compromised its current key state, the attacker no longer has
 access to an endpoint, and a successful key update introduces fresh keying
 material that the attacker does not know.
@@ -168,7 +166,8 @@ Distribution of post-quantum update cost:
 : Scheduling complete post-quantum key updates at different points during
 the life of a connection. This changes when the cost is incurred but does
 not necessarily reduce its total computation or bandwidth cost. A protocol
-can separately choose to fragment a single update across several messages.
+can separately choose to fragment a single update across several messages
+and interleave those messages with application data.
 
 Bundle Protocol:
 : The store-and-forward protocol used in delay-tolerant networking
@@ -185,10 +184,9 @@ and QUIC do not provide inherent replay protection for 0-RTT data
 An asynchronous network and an asynchronous key update are distinct. The
 network property concerns reachability and delivery. The key management
 property considered here has two parts: either endpoint can independently
-initiate an update without waiting for a live response, and the update
+initiate and complete an update without waiting for a live response, and the update
 incorporates fresh randomness in a way that can provide post-compromise
-security. Some use cases also involve an asynchronous network, but that is not
-a prerequisite for using the key update mechanism.
+security. Depending on the protocol, using the updated keying material may require a live response. Some use cases also involve an asynchronous network, but that is not a prerequisite for using the key update mechanism.
 
 Five problems follow.
 
@@ -208,12 +206,12 @@ through an interactive exchange
 {{I-D.ietf-tls-extended-key-update}}
 {{I-D.ietf-quic-extended-key-update}}. On paths subject to contact windows,
 long propagation delay, or interruption, completing that exchange can be
-difficult.
+difficult, espicially with post-quantum cryptography.
 
 3. Limits of resumption after network failure:
 : Resumption can avoid a full authenticated handshake. Its security depends
 on the selected mode and on which secrets an attacker has obtained. Fresh
-ephemeral Diffie-Hellman can protect new 1-RTT traffic, but resumption does
+ephemeral asymmetric key exchange can protect new 1-RTT traffic, but resumption does
 not recover security if the attacker retains the resumption secret. A new
 connection can also require another post-quantum exchange.
 
@@ -221,9 +219,7 @@ connection can also require another post-quantum exchange.
 : Forward secrecy can be provided by the initial ephemeral key exchange and
 secure deletion of old key state. Post-compromise security additionally
 requires that after the attacker loses access, the connection must incorporate
-fresh keying material unknown to the attacker {{RFC9420}}. If updates that
-introduce fresh keying material require an interactive exchange, recovery
-cannot begin while the peer is unreachable.
+fresh keying material unknown to the attacker {{RFC9420}}. This may require authenticated updates. If updates that introduce fresh keying material require an interactive exchange, recovery cannot begin while the peer is unreachable.
 
 5. Per-endpoint key update management:
 : Standardized TLS and QUIC traffic key updates can be initiated by either
@@ -242,7 +238,7 @@ and endpoint assumptions under which it provides the relevant properties.
 
 ## Space
 
-Distance and orbitology between communicating endpoints in space create an environment in which high latency and intermittent link availability are common. Round-trip times range from 20ms in near-earth communications to 23 minutes for deep space. Interactive key exchange protocols that require endpoints to be online and use multiple round trips are sub-optimal in this case. Furthermore, low size, weight, and power devices ubiquitous to this environment benefit the most from amortized bandwidth savings on post-quantum key updates which are not possible using stateless interactive protocols.
+Distance and orbitology between communicating endpoints in space create an environment in which high latency and intermittent link availability are common. Reported round-trip times range from 20ms in near-earth communications to 23 minutes for deep space. Interactive key exchange protocols that require endpoints to be online and use multiple round trips are sub-optimal in this case. Furthermore, low size, weight, and power devices ubiquitous to this environment benefit the most from amortized bandwidth savings on post-quantum key updates which are not possible using stateless interactive protocols.
 
 Existing approaches to key agreement for endpoints in space involve pre-shared keys and/or highly customized interactive key agreement such as QUIC {{I-D.ietf-tiptop-quic-profile}}. Neither of these approaches nor their combinations have satisfactory solutions (e.g. symmetric key **ratcheting**, key wrapping, session resumption keys) to attain post-compromise security under intermittent connectivity. Such a property that is warranted given the growing presence of public health, financial, and critical infrastructure management data on these endpoints. The Delay-Tolerant Networking working group is progressing asynchronous key agreement for Bundle Protocol Security, which is independent evidence that this case is real and that a constituency outside this work holds it.
 
@@ -333,8 +329,7 @@ material to TLS and QUIC
 {{I-D.ietf-tls-extended-key-update}}
 {{I-D.ietf-quic-extended-key-update}}. They address the lack of
 post-compromise recovery in the standardized traffic key update mechanisms.
-They require response messages before the endpoints complete an update. They
-therefore do not provide the asynchronous update property described in this
+They require response messages before the endpoints complete an update. They also require changes to the application protocol to enable authenticated updates. They therefore do not provide the asynchronous update property described in this
 document.
 
 QUIC supports resumption, and it permits 0-RTT data on a new connection.
@@ -371,11 +366,9 @@ transport, or application layer.
 material without a live response from its peer, and allow the peer to process
 that update later from compatible predecessor state.
 
-* support post-quantum key establishment and state whether authentication is
-classical, post-quantum, or hybrid.
+* support post-quantum key establishment and authentication.
 
-* authenticate each endpoint and bind every update to the connection, the
-initiating endpoint, and the applicable key state.
+* authenticate each endpoint and provide appropriate binding between key updates and the connection, the initiating endpoint, and the relevant key state.
 
 * provide forward secrecy under an explicit secure-deletion assumption.
 
@@ -383,7 +376,7 @@ initiating endpoint, and the applicable key state.
 successful key update introduces fresh keying material that the attacker does
 not know.
 
-* prevent downgrade from the post-quantum or hybrid mode selected by policy.
+* prevent downgrade attacks.
 
 * be accompanied by a formal security analysis.
 
@@ -398,9 +391,9 @@ without waiting for a live round trip.
 schedule, including regular or predetermined intervals, based on its
 role, risk profile, power, capabilities, and workload.
 
-* allow a deployment to distribute complete post-quantum key updates
+* allow a deployment to distribute key updates
 throughout the life of a connection. A solution can also fragment one update
-across several messages, but fragmentation is a separate mechanism.
+across several messages and interleave those messages with application data, but fragmentation is a separate mechanism.
 
 * ensure that compromise of current key state does not reveal traffic
 protected using earlier key states, provided the secrets needed to derive
@@ -459,7 +452,7 @@ both. Hybrid negotiation must bind the selected algorithms and key updates
 to authenticated protocol state to prevent downgrade or component stripping.
 
 A resumed connection cannot claim post-compromise recovery if it is based on a
-resumption secret that the attacker still knows. A solution needs to specify
+resumption secret that the attacker still knows. Protection against active attackers require authenticated updates. A solution needs to specify
 how a compromised resumption state is invalidated.
 
 The scope is limited to connections between two endpoints. A third party that
