@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-09-20T02:10:31.252990+00:00",
+  "timestamp": "2026-09-24T02:02:40.268499+00:00",
   "repo": "seanturner/current-problem-statement",
   "labels": [
     {
@@ -60,15 +60,15 @@
       "id": "I_kwDOT47FSM8AAAABM2iFgg",
       "title": "BOF proposals due 2026-09-18",
       "url": "https://github.com/seanturner/current-problem-statement/issues/1",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "seanturner",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "IETF 127 BOF proposals are due:\n\n2026-09-18 | Friday | Cut-off date for BOF proposal requests. To request a BoF session use the [IETF BoF Request Tool](https://datatracker.ietf.org/doc/bof-requests).\n-- | -- | --\n",
       "createdAt": "2026-08-15T03:37:53Z",
-      "updatedAt": "2026-08-15T03:37:53Z",
-      "closedAt": null,
+      "updatedAt": "2026-09-24T00:55:12Z",
+      "closedAt": "2026-09-24T00:55:12Z",
       "comments": []
     },
     {
@@ -92,7 +92,7 @@
       "id": "I_kwDOT47FSM8AAAABQwtN3w",
       "title": "Introduction: Comment",
       "url": "https://github.com/seanturner/current-problem-statement/issues/6",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "seanturner",
       "authorAssociation": "OWNER",
       "assignees": [
@@ -101,8 +101,8 @@
       "labels": [],
       "body": "Introduction, penultimate paragraph contains:\n\n    Connection resumption addresses a different problem. TLS 1.3 resumption\n    with fresh ephemeral Diffie-Hellman can provide forward secrecy for new\n    1-RTT application data, while PSK-only resumption and 0-RTT data have weaker\n    security properties {{RFC8446}}. Resumption does not by itself recover from\n    compromise if the attacker also obtained the resumption secret. Repeating\n    connection establishment can also repeat the computation and bandwidth\n    cost of post-quantum key exchange.\n\nThom wondered:\n\n    Do you want to note that symmetric ratcheting is a useful mechanism here\n    that TLS lacks?\n\nDiscussed during 9 September meeting:\n\n    As discussed, we should note that ratchets is an option not the only option.\n    Add the key update and regular update provides some features.",
       "createdAt": "2026-09-11T02:51:59Z",
-      "updatedAt": "2026-09-11T18:23:16Z",
-      "closedAt": null,
+      "updatedAt": "2026-09-24T00:53:32Z",
+      "closedAt": "2026-09-24T00:53:32Z",
       "comments": []
     },
     {
@@ -158,16 +158,24 @@
       "id": "I_kwDOT47FSM8AAAABRlscUg",
       "title": "Comments of the document.",
       "url": "https://github.com/seanturner/current-problem-statement/issues/14",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "emanjon",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "I think this document is in a very good shape. I read the whole document and have the following comments / suggestions\n\n...\n\n>They do not introduce fresh keying material and therefore cannot restore security after that state has been compromised. Mechanisms that are currently being developed for TLS and QUIC to introduce fresh post-quantum keying material use an interactive exchange.\n\nI found the post-quantum in the second sentence a bit strange.\n\n>This document considers mechanisms through which either endpoint can independently initiate a key update that incorporates fresh randomness and can provide post-compromise security. \n\nWould be good to introduce post-compromise earlier\n\n>Such updates can also distribute post-quantum update costs across a long-lived connection.\n\nNot more that EKU. Would be better to state that \"Intermittent connectivity, long propagation delays, and large post-quantum sizes make the property more valuable. \"\n\n>{{RFC8446}}\n\nShould be 9846\n\n>allows the connection to recover confidentiality\n\nAnd integrity\n\n>The property considered in this document is that either endpoint can independently initiate such an update without waiting for a live response from its peer.\n\nI would remove \"waiting for\" or replace it with \"the need for\"\n\n>Group key agreement is out of scope.\n\nMaybe better with group communication?\n\n>Key agreement that requires a request and a corresponding response before the initiator can complete the agreement and use the resulting keying material.\n\nMaybe change \"use\" to \"store\" or \"accept\" based on comments last meeting\n\n>Forward secrecy: : Protection of traffic from compromise of keying material at a later time. This property depends on deletion of traffic keys and the secret state from which they can be derived.\n\nAlso requires using different keys.\n\n>Post-compromise security: : The property that a connection can restore confidentiality after an attacker has compromised its current key state, the attacker no longer has access to an endpoint, and a successful key update introduces fresh keying material that the attacker does not know.\n\nI don't think PCS is strictly about confidentiality. Would be good to talk about the additional security the MLS signing gives.\n\nWoulld be good to talk about the need to reauthentication without changes to the application layer\n\n>A protocol can separately choose to fragment a single update across several messages.\n\nIs that already specified? Otherwise should make sure to do that at the MLS or TLS/QUIC layer.\n\n>five to fourteen seconds for lunar communications\n\nThis seems a bit unoptimized as the moon is no more than 1.4 light seconds away.\n\n>and between just under one minute and twenty-three minutes between Earth and Mars depending on orbital positions\n\nOne minute seems wrong and twenty-three is not the worst case. Mars is between 3\u201322 light minutes away. One minute round trip seems impossible unless the you use Tachyons :)\n\n>without completing such a live exchange at update time.\n\nShould explain that update time does not mean \"starting to use\"\n\n>A receive-only endpoint whose state was compromised needs fresh keying material that the attacker does not know.\n\nShould explain that this requires a reauthentication.\n\n>Limitations of Current Solutions\n\nI think this should explain that reauthentication with these solutions require changes to the application protocol.\n\n>support post-quantum key establishment and state whether authentication is classical, post-quantum, or hybrid.\n\nMy view is that something new like CURRENT should _only_ focus on PQC (standalone or hybrid) and optimize for that. I think quantum-vulnerable should be explicitly out of scope. It will have zero value in a few years when this is published, and any focus on quantum-vulnerable crypto might be bad for the protocol design.\n\n>authenticate each endpoint and bind every update to the connection, the initiating endpoint, and the applicable key state.\n\nNot sure all updates should be tied to the connection. The resulting session keys should be bound to the connection and update.\n\nCan you start TLS/QUIC with an already established 2-party MLS groups. My answer would be yes.\n\nBinding to the endpoint requires signatures. The document should talk more about the MLS signatures.\n\n>allow a deployment to distribute complete post-quantum key updates throughout the life of a connection. A solution can also fragment one update across several messages, but fragmentation is a separate mechanism.\n\nI think the fragmantion of signed post-quantum key updates is important. I think the mechanism for fragmentation should be specified during the work. For TLS you should be able to interleave a fragmentated signed post-quantum MLS key updates with application data. Otherwise the large update blocks application data transfer for a while.\n\n>define key confirmation and the point at which each endpoint can use or delete a key state.\n\nI think this need to be discussed also earlier.\n\n>Recovery of traffic confidentiality does not restore peer authentication \n>An asynchronous protocol must authenticate updates and bind them to the correct connection, endpoint, direction, and key state.\n\nI think these kind of things should be mentioned earlier.\n\n>A resumed connection cannot claim post-compromise recovery if it is based on a resumption secret that the attacker still knows. A solution needs to specify how a compromised resumption state is invalidated.\n\nAlso here it would be good to discuss passive and active attackers.",
       "createdAt": "2026-09-16T13:42:39Z",
-      "updatedAt": "2026-09-16T13:42:39Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2026-09-24T00:52:25Z",
+      "closedAt": "2026-09-24T00:52:25Z",
+      "comments": [
+        {
+          "author": "seanturner",
+          "authorAssociation": "OWNER",
+          "body": "Closed via #16 ",
+          "createdAt": "2026-09-24T00:52:25Z",
+          "updatedAt": "2026-09-24T00:52:25Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -610,26 +618,55 @@
       "id": "PR_kwDOT47FSM8AAAABEDe0PA",
       "title": "Address comment in issue #14",
       "url": "https://github.com/seanturner/current-problem-statement/pull/16",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "emanjon",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "#14 ",
       "createdAt": "2026-09-18T08:46:03Z",
-      "updatedAt": "2026-09-18T08:56:22Z",
+      "updatedAt": "2026-09-24T00:51:42Z",
       "baseRepository": "seanturner/current-problem-statement",
       "baseRefName": "main",
       "baseRefOid": "0456c65591c23f9d9e68a874359ee5c59344148e",
       "headRepository": "emanjon/current-problem-statement",
       "headRefName": "patch-1",
       "headRefOid": "aae176f69facb16045636df63b96aa8d661c8c88",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-09-24T00:51:42Z",
+      "mergedAt": "2026-09-24T00:51:42Z",
+      "mergedBy": "seanturner",
+      "mergeCommit": {
+        "oid": "5b02476255f32aaa08c36524c88a88e6486511b0"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOT47FSM8AAAABOr4L1A",
+          "commit": {
+            "abbreviatedOid": "aae176f"
+          },
+          "author": "raphaelrobert",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-09-22T15:57:39Z",
+          "updatedAt": "2026-09-22T15:57:39Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOT47FSM8AAAABOzOgig",
+          "commit": {
+            "abbreviatedOid": "aae176f"
+          },
+          "author": "kkohbrok",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-09-23T07:43:29Z",
+          "updatedAt": "2026-09-23T07:43:29Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
