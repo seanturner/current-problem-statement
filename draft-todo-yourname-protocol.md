@@ -354,23 +354,24 @@ analyzed in a formal cryptographic model.
 
 # Properties of a Solution
 
-The following properties describe a solution to the problem. They do not
-prescribe a particular key agreement protocol.
+The following candidate requirements describe the security, operational,
+and integration properties of a solution. They do not prescribe a particular
+key agreement protocol. Requirements that depend on a particular deployment
+are identified separately.
+
+## Security Requirements
 
 A solution needs to:
-
-* derive keying material for a two-endpoint security protocol at the network,
-transport, or application layer.
-
-* allow an endpoint to generate an update that introduces fresh keying
-material without a live response from its peer, and allow the peer to process
-that update later from compatible predecessor state.
 
 * support post-quantum key establishment and authentication.
 
 * authenticate each endpoint and provide appropriate binding between key updates and the connection, the initiating endpoint, and the relevant key state.
 
 * provide forward secrecy under an explicit secure-deletion assumption.
+
+* ensure that compromise of current key state does not reveal traffic
+protected using earlier key states, provided the secrets needed to derive
+those earlier states have been deleted.
 
 * provide post-compromise security after the attacker loses access and a
 successful key update introduces fresh keying material that the attacker does
@@ -379,6 +380,14 @@ not know.
 * prevent downgrade attacks.
 
 * be accompanied by a formal security analysis.
+
+## Asynchronous Operation and State Management
+
+A solution needs to:
+
+* allow an endpoint to generate an update that introduces fresh keying
+material without a live response from its peer, and allow the peer to process
+that update later from compatible predecessor state.
 
 The use cases in Section 4 add the following properties:
 
@@ -391,13 +400,17 @@ without waiting for a live round trip.
 schedule, including regular or predetermined intervals, based on its
 role, risk profile, power, capabilities, and workload.
 
+## Performance and Deployment
+
+A solution needs to:
+
 * allow a deployment to distribute key updates
 throughout the life of a connection. A solution can also fragment one update
 across several messages and interleave those messages with application data, but fragmentation is a separate mechanism.
 
-* ensure that compromise of current key state does not reveal traffic
-protected using earlier key states, provided the secrets needed to derive
-those earlier states have been deleted.
+## Recovery and Synchronization
+
+A solution needs to:
 
 * define how endpoints handle lost, duplicated, reordered, stale, and
 concurrent updates.
@@ -408,15 +421,30 @@ reusing keys or accepting unauthenticated state.
 * define key confirmation and the point at which each endpoint can use or
 delete a key state.
 
-* separate keying material used for different directions, epochs, protocols,
-and purposes.
-
 * limit the computation, storage, and bandwidth that unauthenticated or stale
 updates can cause.
 
 A solution can retain per-connection state. It needs to specify storage bounds,
 state expiration, crash recovery, and the security consequences of restoring
 an older state snapshot.
+
+## Keying Material and Protocol Integration
+
+A solution needs to:
+
+* derive keying material for a two-endpoint security protocol at the network,
+transport, or application layer.
+
+* separate keying material used for different directions, epochs, protocols,
+and purposes.
+
+## Validation
+
+The formal security analysis needs to identify the compromise assumptions,
+conditions for forward secrecy and post-compromise security, and the point
+at which recovery applies to protected traffic. Evaluation should compare
+communication rounds, transmitted bytes, computation, storage, and traffic
+interruption against existing mechanisms for representative use cases.
 
 # Security Considerations
 
