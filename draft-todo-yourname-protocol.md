@@ -411,6 +411,22 @@ delete a key state.
 * separate keying material used for different directions, epochs, protocols,
 and purposes.
 
+* define a context-bound key export function or interface that separates
+keying material by consuming protocol, security association, direction,
+purpose, and key epoch, as applicable. Export must not disclose agreement
+secrets beyond the authorized consumers.
+
+* distinguish derivation and export of keying material from its provisioning,
+installation, activation, and retirement by the consuming security protocol.
+The integration must specify how peers coordinate use of new keys, including
+when delivery or confirmation is delayed, without assuming that successful
+local key derivation implies that protected traffic can use the new key.
+
+* specify the security responsibilities at the key export boundary, including
+key identification, authorization, state synchronization, and failure handling.
+These requirements do not mandate a single transport-independent provisioning
+API or changes to existing packet-protection formats.
+
 * limit the computation, storage, and bandwidth that unauthenticated or stale
 updates can cause.
 
