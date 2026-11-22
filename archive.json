@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-09-24T02:02:40.268499+00:00",
+  "timestamp": "2026-11-22T03:54:11.691116+00:00",
   "repo": "seanturner/current-problem-statement",
   "labels": [
     {
@@ -667,6 +667,58 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 17,
+      "id": "PR_kwDOT47FSM8AAAABQwv2nA",
+      "title": "Clarify and organize CURRENT requirements",
+      "url": "https://github.com/seanturner/current-problem-statement/pull/17",
+      "state": "OPEN",
+      "author": "dfedyk",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Reorganizes the candidate requirements into clearer categories while preserving the existing problem statement and use cases.",
+      "createdAt": "2026-11-20T20:30:14Z",
+      "updatedAt": "2026-11-20T20:30:14Z",
+      "baseRepository": "seanturner/current-problem-statement",
+      "baseRefName": "main",
+      "baseRefOid": "5b02476255f32aaa08c36524c88a88e6486511b0",
+      "headRepository": "dfedyk/current-problem-statement",
+      "headRefName": "review-requirements",
+      "headRefOid": "f9caeb60a5669051a0d348511c46f506e410af5f",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 18,
+      "id": "PR_kwDOT47FSM8AAAABQxdnzg",
+      "title": "Clarify CURRENT key export and protocol integration",
+      "url": "https://github.com/seanturner/current-problem-statement/pull/18",
+      "state": "OPEN",
+      "author": "dfedyk",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Clarifies key export, protocol context binding, and the distinction between key derivation and key provisioning, installation, activation, and retirement.",
+      "createdAt": "2026-11-20T21:32:04Z",
+      "updatedAt": "2026-11-20T21:32:04Z",
+      "baseRepository": "seanturner/current-problem-statement",
+      "baseRefName": "main",
+      "baseRefOid": "5b02476255f32aaa08c36524c88a88e6486511b0",
+      "headRepository": "dfedyk/current-problem-statement",
+      "headRefName": "review-export",
+      "headRefOid": "e0dc7b3994f37e169386206bba29538ec37b7a3a",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
